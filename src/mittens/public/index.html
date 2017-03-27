@@ -1,0 +1,61 @@
+<html ng-app="mittens">
+<head>
+	<title>Mittens</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"></link>
+	
+	<style>
+		.feed {
+			margin-left:100px;
+			margin-right:100px;
+			margin-top:50px;
+			min-height:1000px;
+		}
+		.feed h3{
+			border:1px solid #333;
+			padding:20px;
+		}
+	</style>
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('mittens', []);
+
+		app.controller('MittensCtrl', function($scope, $http){
+
+			$scope.submitNewMeow = function(){
+				$http.post('/meows',{newMeow:$scope.newMeow}).then(function(){
+					alert("success");
+				});
+			};	
+
+			$http.get('/meows').then(function(response){
+				$scope.meows = response.data;
+			});
+			
+		
+		});	
+
+	</script>
+</head>
+<body ng-controller="MittensCtrl">
+	<h1>Mittens</h1>
+	<div class="row feed">
+		<div class="col-md-4">
+			Login:<br><br>
+			<input type="text" size="30" placeholder="Username"><br><br>
+			<input type="password" size="30" placeholder="Password">
+		</div>
+		<div class="col-md-8">
+			<div class="new-meow">
+				<input type="text" class="form control" placeholder="Whats on your mind" ng-model="newMeow">
+				<button type="button" class="btn" ng-click="submitNewMeow()">Submit</button>
+				{{newMeow}}
+			</div>
+			<h3 ng-repeat="meow in meows">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+				{{meow.text}}
+			</h3>
+	
+		</div>
+	</div>
+	</body>
+</html>

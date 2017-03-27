@@ -1,0 +1,78 @@
+<html ng-app="Ashwini">
+<head>
+	<title>MY LOGIN</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+	<style>
+		.feed {
+			margin-left:100px;
+			margin-right:100px;
+			margin-top:50px;
+			min-height:1000px;
+		}
+		.feed h3{
+			border:1px solid #333;
+			padding:20px;
+		}
+	</style>
+	<script type="text/javascript" src="angular.min.js"></script>
+        
+	<script type="text/javascript">
+		var app = angular.module('Ashwini', []);
+
+		app.controller('MittensCtrl', function($scope, $http){
+
+			
+			$scope.removeMeow = function(meow){
+				$http.post('/remove',{newMeow:meow}).then(function(response){
+					alert("deleted");
+					
+				});
+				getMeows();
+			};	
+			
+			
+
+			function getMeows(){
+			$http.get('/meows').then(function(response){
+				$scope.meows1 = response.data;
+			});
+			}
+			getMeows();
+		
+		
+		});	
+
+	</script>
+</head>
+<body ng-controller="MittensCtrl">
+	
+
+
+
+	<div class="row feed">
+		
+		<div class="col-md-8">
+			<div class="new-meow">
+				
+				
+				{{newMeow}}
+			</div>
+			<h3 ng-repeat="meow in meows1">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+				{{meow.event_name}}<br>
+				{{meow.event_city}}<br>
+				{{meow.event_type}}
+				<button style="float:right" type="button" class="btn-danger" ng-click="removeMeow(meow.text)">x</button>
+			</h3>
+	
+		</div>
+	</div>
+	</body>
+</html>

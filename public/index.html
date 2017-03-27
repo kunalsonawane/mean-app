@@ -1,0 +1,80 @@
+<html ng-app="Ashwini">
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+	<style>
+		.feed {
+			margin-left:100px;
+			margin-right:100px;
+			margin-top:50px;
+			min-height:1000px;
+		}
+		.feed h3{
+			border:1px solid #333;
+			padding:20px;
+		}
+	</style>
+	<script type="text/javascript" src="angular.min.js"></script>
+        
+	<script type="text/javascript">
+		var app = angular.module('Ashwini', []);
+   
+
+		app.controller('MittensCtrl', function($scope, $http, $window){
+
+			
+			$scope.submitNewUser = function(){
+				$http.post('/user',{username:$scope.username, password:$scope.password}).then(function(){
+					alert("user registered");
+				});
+			};	
+                        $scope.signinuser = function(){
+				$http.post('/userlogin',{username:$scope.username, password:$scope.password}).then(function(response){
+					if(response.data!="")
+					{
+						
+
+						$window.location.href = '/index1.html';
+                                         
+                                          alert($scope.username);
+					}
+                                        else
+					  alert("logged in unsuccessfull");
+				});
+			};
+			
+		
+		
+		});	
+
+	</script>
+</head>
+<body ng-controller="MittensCtrl">
+	
+
+
+	<div class="container" style="width:30%;">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text"  class="form-control" placeholder="Email address" required autofocus ng-model="username">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password"  class="form-control" placeholder="Password" required ng-model="password">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="submitNewUser()">Sign Up</button>
+		<button class="btn btn-lg btn-primary btn-block" type="button" ng-click="signinuser()">Sign In</button>
+      </form>
+
+    </div> <!-- /container -->
+
+	
+	</body>
+</html>

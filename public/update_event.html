@@ -1,0 +1,184 @@
+<html ng-app="Ashwini">
+
+<head>
+  <title>Update event</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="angular.min.js"></script>
+  
+  	<script type="text/javascript">
+		var app = angular.module('Ashwini', []);
+
+		app.controller('EventCtrl', function($scope, $http, $window, $location){
+
+			$scope.submitNewEvent = function(){
+				$http.post('/events',{event_name:$scope.event_name,
+				                        event_city:$scope.event_city,
+				                        event_description:$scope.event_description,
+				                         event_type:$scope.event_type,
+										 event_image:$scope.event_image,
+										 event_lattitude:$scope.event_lattitude,
+										 event_longitude:$scope.event_longitude,
+										 event_pincode:$scope.event_pincode}).then(function(){
+						$window.location.href = '/index1.html';
+				});
+				
+	
+			};
+	
+
+			
+
+			
+	
+						
+						var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = decodeURIComponent(pair[1]);
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+    }
+  } 
+  return query_string;
+}();
+			
+	$scope.event_to_update = QueryString.event_name;		
+    
+		function getMeows(){
+			$http.post('/geteventbyname',{event_to_update:$scope.event_to_update}).then(function(response){
+				$scope.meows = response.data;
+				alert($scope.meows.event_name);
+				document.getElementById("event_name").value=$scope.meows.event_name;
+				document.getElementById("event_city").value=$scope.meows.event_city;
+				document.getElementById("event_type").value=$scope.meows.event_type;
+				document.getElementById("event_lattitude").value=$scope.meows.event_lattitude;
+				document.getElementById("event_longitude").value=$scope.meows.event_longitude;
+				document.getElementById("event_description").value=$scope.meows.event_description;
+				document.getElementById("event_pincode").value=$scope.meows.event_pincode;
+			});
+			};
+			getMeows();
+			
+			
+			$scope.UpdateEvent = function(){
+				console.log($scope.event_to_update);
+				$http.post('/updateevent',{event_to_update:$scope.meows.event_name,event_name:document.getElementById("event_name").value,
+				                        event_city:document.getElementById("event_city").value,
+				                        event_description:document.getElementById("event_description").value,
+				                         event_type:document.getElementById("event_type").value,
+										 event_image:$scope.event_image,
+										 event_lattitude:document.getElementById("event_lattitude").value,
+										 event_longitude:document.getElementById("event_longitude").value,
+										 event_pincode:document.getElementById("event_pincode").value}).then(function(){
+						$window.location.href = '/index1.html';
+				});
+				
+	
+			};
+			
+		
+		});	
+
+	</script>
+</head>
+<body ng-controller="EventCtrl">
+<ul class="nav nav-tabs">
+  <li role="presentation" ><a href="/index1.html">Home</a></li>
+  <li role="presentation" class="active"><a href="#">create event</a></li>
+  
+
+</ul>
+<div class="container">
+  <h2>Update Event</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="event_name">Event Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_name"  ng-model="event_name" readonly>
+      </div>
+    </div>
+    
+    
+        
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_description">event description:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_description" placeholder="Type event description..." ng-model="event_description">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_type">Event type:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_type" placeholder="Type event type...." ng-model="event_type" value={{meows.event_type}}>
+        {{event_type}}
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_image">Event image:</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control" id="event_image" placeholder="Type event image...." ng-model="event_image">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_city">Event city:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_city" placeholder="Type event city...." ng-model="event_city">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_lattitude">Event lattitude:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_lattitude" placeholder="Type lattitude ...." ng-model="event_lattitude">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_longitude">Event longitude:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_longitude" placeholder="Type event longitude...." ng-model="event_longitude">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_pincode">Event pincode:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_pincode" placeholder="Type event pincode...." ng-model="event_pincode">
+      </div>
+    </div>
+    
+       
+    
+    
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        
+        <button type="button" class="btn" ng-click="UpdateEvent()">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
+

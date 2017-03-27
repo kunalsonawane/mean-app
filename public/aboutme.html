@@ -1,0 +1,150 @@
+<html ng-app="Ashwini">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="angular.min.js"></script>
+  
+  	<script type="text/javascript">
+		var app = angular.module('Ashwini', []);
+
+		app.controller('EventCtrl', function($scope, $http){
+
+			$scope.submitNewEvent = function(){
+				$http.post('/events',{event_name:$scope.event_name,
+				                        event_city:$scope.event_city,
+				                        event_description:$scope.event_description,
+				                         event_type:$scope.event_type,event_image:$scope.event_image,event_lattitude:$scope.event_lattitude,event_longitude:$scope.event_longitude,event_pincode:$scope.event_pincode}).then(function(){
+					alert("done");
+				});
+				
+	
+			};
+			
+			
+
+		
+		
+		});	
+
+	</script>
+</head>
+<body ng-controller="EventCtrl">
+
+<div class="container">
+  <h2>Horizontal form</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="event_name">Event Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_name" placeholder="Type event name...." ng-model="event_name">
+      </div>
+    </div>
+    <div>
+    <input type="checkbox" name="vehicle1" value="Bike">  feeling happy<br>
+  <input type="checkbox" name="vehicle2" value="Car"> sad<br>
+  <input type="checkbox" name="vehicle3" value="Boat"> getting bored<br>
+  <input type="submit" value="Submit">
+    </div>
+    <div>
+    Birthday: <input type="date" name="bday">
+  <input type="submit">
+    </div>
+    <div>
+    E-mail: <input type="email" name="usremail">
+    </div>
+    <div>
+     <input type="range" name="points" min="0" max="10">
+     </div>
+     <div>
+     Telephone: <input type="tel" name="usrtel">
+     </div>
+     <div>
+     Add your homepage: <input type="url" name="homepage">
+     </div>
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_date_start">Event start date:</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="event_date_start" placeholder="Type Event start date...." ng-model="event_date_start">
+      </div>
+    </div>
+   
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_date_end">Event end date:</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="event_date_end" placeholder="Type Event end date...." ng-model="event_date_end">
+        {{event_date_end}}
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_description">event description:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_description" placeholder="Type event description..." ng-model="event_description">
+        {{event_description}}
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_type">Event type:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_type" placeholder="Type event type...." ng-model="event_type">
+        {{event_type}}
+        
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_image">Event image:</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control" id="event_image" placeholder="Type event image...." ng-model="event_image">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_city">Event city:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_city" placeholder="Type event city...." ng-model="event_city">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_lattitude">Event lattitude:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_lattitude" placeholder="Type lattitude ...." ng-model="event_lattitude">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_longitude">Event longitude:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_longitude" placeholder="Type event longitude...." ng-model="event_longitude">
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="event_pincode">Event pincode:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="event_pincode" placeholder="Type event pincode...." ng-model="event_pincode">
+      </div>
+    </div>
+    
+       
+    
+    
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        
+        <button type="button" class="btn" ng-click="submitNewEvent()">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
+

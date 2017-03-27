@@ -1,0 +1,16 @@
+/*
+ * Theme Name:  Bailey (child theme)
+ * Theme URI:   https://thethemefoundry.com/wordpress-themes/bailey
+ * Author:      The Theme Foundry
+ * Author URI:  https://thethemefoundry.com
+ * Description: A minimal portfolio theme with designer grid layouts and easy-to-configure projects. Crafted with a responsive layout that looks great on large displays, tablets and mobile devices.
+ * Version:     1.0.0
+ * License:     GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: bailey
+ * Domain Path: /languages/
+ * Tags: 		abstract, art, artistic, artwork, black, blog, blue, bright, business, clean, contemporary, craft, custom-background, custom-colors, custom-menu, design, editor-style, fashion, featured-images, full-width-template, light, minimal, modern, one-column, photoblogging, photography, portfolio, professional, responsive-layout, scrapbooking, simple, sophisticated, sticky-post, theme-options, three-columns, translation-ready, two-columns, video, white
+ * Template:    bailey
+ */
+
+@import url( '/style.css' );
